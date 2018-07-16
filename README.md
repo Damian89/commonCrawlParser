@@ -1,9 +1,9 @@
 # cc.py
-Extracting URLs of a specific target based on the results of "commoncrawl.org"
+Simple tool to extract domain related data from commoncrawl.org
 
 **Usage**
 ```
-cc.py [-h] -d domain -o path [-i index1] [-i index2]
+ccp.py [-h] -d domain -o path [-i index1] [-i index2]
 
 positional arguments:
   -d, --domain   The domain you want to search for in CC data.
@@ -16,18 +16,15 @@ optional arguments:
 
 **Examples**
 ```
-python3 cc.py -d github.com -o /home/folder/cc/data.txt
-cat /home/folder/cc/data.txt | grep user
+python3 ccp.py -d github.com -o /home/folder/cc/data.txt
 ```
 
 ```
-python3 cc.py -d github.com -o ./data.txt -i CC-MAIN-2017-09
-cat ./data.txt | grep user
+python3 ccp.py -d github.com -o ./data.txt -i CC-MAIN-2017-09
 ```
 
 ```
-python3 cc.py -d github.com -o ./data.txt -i CC-MAIN-2017-09 -i CC-MAIN-2017-04
-cat ./data.txt | grep user
+python3 ccp.py -d github.com -o ./data.txt -i CC-MAIN-2017-09 -i CC-MAIN-2017-04
 ```
 
 **Dependencies**
