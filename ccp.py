@@ -3,42 +3,55 @@
 
 import sys
 
+import queue
+
 if sys.version_info < (3, 0):
     sys.stdout.write("Sorry, Python 3.x is required\n")
     sys.exit(1)
 
-
-from inc.request import getCCResponse,makeCCUrl
 from inc.arguments import getArguments
 from inc.write import writeResults
-from inc.index import filterIndices, getIndices, intersectLists
+from inc.index import filterIndices, getIndices
 from inc.extract import extractLinksFromCC
+from inc.worker import WorkerThread
+from inc.request import makeCCUrl
 
 def main():
-    domain, outfile, index_used = getArguments()
+    domain, outfile, max_threads, index_used = getArguments()
 
     indices = getIndices()
     indices = filterIndices(index_used, indices)
 
     ccEntries = []
 
+    queueAll = queue.Queue()
+
+    threads = []
+
+    for i in range(0, max_threads):
+        print("\033[32m[ i ]\033[0m Worker {} started...".format(i))
+        worker = WorkerThread(queueAll, i, ccEntries)
+        worker.setDaemon(True)
+        worker.start()
+        threads.append(worker)
+
     for index in indices:
-        print("\033[32m[ i ]\033[0m Request to {}".format(index))
+        queueAll.put([index, makeCCUrl(domain, index)])
 
-        url = makeCCUrl(domain, index)
-        lines = getCCResponse(url)
-        ccEntries.append(lines)
+    for item in threads:
+        item.join()
 
-    print("\033[32m[ i ] Finished all requests \033[0m")
+    print("\033[32m[ i ]\033[0m Finished all requests")
 
-    print("Extracting links...")
+    print("\033[32m[ i ]\033[0m Extracting links...")
     links = extractLinksFromCC(ccEntries)
-    print("Found {} lines in responses".format(len(links)))
+    print("\033[32m[ i ]\033[0m Found {} lines in responses".format(len(links)))
 
-    print("Writing links to {}".format(outfile))
+    print("\033[32m[ i ]\033[0m Writing links to {}".format(outfile))
     writeResults(links, outfile)
 
-    print("Finished!")
+    print("\033[32m[ i ]\033[0m Finished!")
+
 
 if __name__ == "__main__":
     main()

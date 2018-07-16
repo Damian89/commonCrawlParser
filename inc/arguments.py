@@ -14,14 +14,23 @@ def getArguments():
         default=None,
         required=True
     )
+
     parser.add_argument(
         "-o", "--outfile",
         help="Path to save the output",
         type=str,
         dest="outfile",
         required=True
-
     )
+
+    parser.add_argument(
+        "-t", "--threads",
+        help="Threads",
+        type=int,
+        dest="threads",
+        default=5
+    )
+
     parser.add_argument(
         "-i", "--index",
         nargs="?",
@@ -33,4 +42,4 @@ def getArguments():
     )
     args = parser.parse_args()
 
-    return args.domain, args.outfile, args.index_used
+    return args.domain, args.outfile, args.threads, args.index_used
