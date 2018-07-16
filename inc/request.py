@@ -27,5 +27,5 @@ def getCCResponse(url):
 
 
 def makeCCUrl(domain, index):
-    url = "http://index.commoncrawl.org/" + index + "-index?url=*." + domain + "&output=json".format()
+    url = "https://index.commoncrawl.org/" + index + "-index?url=*." + domain + "&output=json".format()
     return url
