@@ -23,7 +23,7 @@ def filterIndices(index_used, indices):
         indices = intersectLists(indices, index_used)
 
     if len(indices) == 0:
-        print("\033[31m[!!] Not indices selected, may your filter is wrong!\033[0m")
+        print("\033[31m[ ! ] Not indices selected, may your filter is wrong!\033[0m")
         sys.exit()
 
     return indices

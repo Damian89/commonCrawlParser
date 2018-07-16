@@ -23,13 +23,13 @@ def main():
     ccEntries = []
 
     for index in indices:
-        print("\033[32m[i]\033[0m Request to {}".format(index))
+        print("\033[32m[ i ]\033[0m Request to {}".format(index))
 
         url = makeCCUrl(domain, index)
         lines = getCCResponse(url)
         ccEntries.append(lines)
 
-    print("\033[32m[i] Finished all requests \033[0m")
+    print("\033[32m[ i ] Finished all requests \033[0m")
 
     print("Extracting links...")
     links = extractLinksFromCC(ccEntries)

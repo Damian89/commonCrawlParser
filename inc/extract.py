@@ -21,7 +21,7 @@ def extractLinksFromCC(ccEntries):
                 pass
 
     if len(links) == 0:
-        print("\033[31m[!!]\033[0m No links found... sorry!")
+        print("\033[31m[ ! ]\033[0m No links found... sorry!")
         sys.exit()
 
     return list(set(links))
