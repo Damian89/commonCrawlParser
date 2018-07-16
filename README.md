@@ -15,14 +15,18 @@ optional arguments:
 ```
 
 **Examples**
+
+Search for github.com and save to /home/folder/cc/data.txt
 ```
 python3 ccp.py -d github.com -o /home/folder/cc/data.txt
 ```
 
+Search for github.com in index "CC-MAIN-2017-09", save to data.txt
 ```
 python3 ccp.py -d github.com -o ./data.txt -i CC-MAIN-2017-09
 ```
 
+Search for github.com in index "CC-MAIN-2017-09" & "CC-MAIN-2017-04", save to data.txt
 ```
 python3 ccp.py -d github.com -o ./data.txt -i CC-MAIN-2017-09 -i CC-MAIN-2017-04
 ```
