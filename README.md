@@ -37,6 +37,45 @@ Search for github.com using 10 threads, save to data.txt
 python3 ccp.py -d github.com -o ./data.txt -t 10
 ```
 
+**grep tips**
+
+I am no grep expert but I know how to extract data, if you have better solutions for my existing commands OR additional ideas what to search for: __PR__
+
+1. Find entries which end with popular file extension indicating dynamic pages etc:
+```
+grep -i -E '\.(php|asp|dev|jsp|wsdl|xml|cgi|json|html)$' /home/folder/cc/data.txt
+```
+
+2. Find interesting files like backups, archives, log files...
+```
+grep -i -E '\.(zip|rar|tar|bkp|sql|zip|bz2|gz|txt|bak|conf|log|error|debug|yml|lock|template|tpl)$' /home/folder/cc/data.txt
+```
+
+3. Find entries which contain popular strings like "admin" etc:
+```
+grep -i -E '(admin|account|debug|control|config|upload|system|secret|environment|dashboard)$' /home/folder/cc/data.txt
+```
+
+4. Find files which begin with "." (htaccess, ...):
+```
+grep -i -E '\/\.' /home/folder/cc/data.txt
+```
+
+5. Find obvious backup files:
+```
+grep -i -E '(\.bkp|\.bak|backup|\.dump|\.sql)' /home/folder/cc/data.txt
+```
+
+6. Extract subdomains:
+```
+sed -e 's|^[^/]*//||' -e 's|^www\.||' -e 's|/.*$||' /home/folder/cc/data.txt | grep -v ":" | grep -v "@" | grep -v "?" | grep -v "/" | sort -u
+```
+
+7. Find urls with parameters in it:
+```
+grep -i -E '(\?|\&)(.*?)=((.*?)|)' /home/folder/cc/data.txt | sort -u
+```
+
 **Dependencies**
 * python3
 * requests
