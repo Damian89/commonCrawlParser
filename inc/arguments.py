@@ -32,14 +32,14 @@ def getArguments():
     )
 
     parser.add_argument(
-        "-i", "--index",
+        "-f", "--filter",
         nargs="?",
         type=str,
         action="append",
-        help="Use only this index",
-        dest="index_used",
+        help="Words to filter indices for",
+        dest="filter",
         default=None
     )
     args = parser.parse_args()
 
-    return args.domain, args.outfile, args.threads, args.index_used
+    return args.domain, args.outfile, args.threads, args.filter

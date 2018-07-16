@@ -3,7 +3,7 @@ Simple multi threaded tool to extract domain related data from commoncrawl.org
 
 **Usage**
 ```
-ccp.py [-h] -d domain -o path [-t THREADS] [-i index1] [-i index2]
+ccp.py [-h] -d domain -o path [-t THREADS] [-f index1] [-f index2]
 
 necessary arguments:
   -d, --domain   The domain you want to search for in CC data.
@@ -11,7 +11,7 @@ necessary arguments:
 
 optional arguments:
   -h, --help     Show help message and exit
-  -i, --index    Use only this specified index
+  -f, --filter   Use only indices which contain this string
   -t, --threads  Threads for requests
 ```
 
@@ -22,14 +22,14 @@ Search for github.com and save to /home/folder/cc/data.txt
 python3 ccp.py -d github.com -o /home/folder/cc/data.txt
 ```
 
-Search for github.com in index "CC-MAIN-2017-09", save to data.txt
+Search for github.com in indices which contain "CC-MAIN-2017-09", save to data.txt
 ```
-python3 ccp.py -d github.com -o ./data.txt -i CC-MAIN-2017-09
+python3 ccp.py -d github.com -o ./data.txt -f CC-MAIN-2017-09
 ```
 
-Search for github.com in index "CC-MAIN-2017-09" & "CC-MAIN-2017-04", save to data.txt
+Search for github.com in indices which contain "2013" and "2014", save to data.txt
 ```
-python3 ccp.py -d github.com -o ./data.txt -i CC-MAIN-2017-09 -i CC-MAIN-2017-04
+python3 ccp.py -d github.com -o ./data.txt -f 2014 -f 2013
 ```
 
 Search for github.com using 10 threads, save to data.txt

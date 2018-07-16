@@ -17,16 +17,15 @@ from inc.worker import WorkerThread
 from inc.request import makeCCUrl
 
 def main():
-    domain, outfile, max_threads, index_used = getArguments()
+    ccEntries = []
+    threads = []
+
+    domain, outfile, max_threads, filterWords = getArguments()
 
     indices = getIndices()
-    indices = filterIndices(index_used, indices)
-
-    ccEntries = []
+    indices = filterIndices(filterWords, indices)
 
     queueAll = queue.Queue()
-
-    threads = []
 
     for i in range(0, max_threads):
         print("\033[32m[ i ]\033[0m Worker {} started...".format(i))

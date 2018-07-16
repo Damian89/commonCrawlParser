@@ -18,15 +18,22 @@ def getIndices():
     return indexlist
 
 
-def filterIndices(index_used, indices):
-    if index_used is not None:
-        indices = intersectLists(indices, index_used)
+def filterIndices(filterWords, indices):
+    if filterWords is None:
+        return indices
 
-    if len(indices) == 0:
+    newIndices = []
+
+    for index in indices:
+        for word in filterWords:
+            if word in index:
+                newIndices.append(index)
+
+    if len(newIndices) == 0:
         print("\033[31m[ ! ] Not indices selected, may your filter is wrong!\033[0m")
         sys.exit()
 
-    return indices
+    return newIndices
 
 
 def intersectLists(indices, index_used_list):
